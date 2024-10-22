@@ -22,6 +22,30 @@ https://developers.geotab.com/myGeotab/apiReference/methods/Get
 
 #>
 
+<#
+.SYNOPSIS
+Get Geotab Entities such as a Device or User
+
+.PARAMETER Session
+Geotab Session Object
+
+.PARAMETER typeName
+Geotab Entity Type
+
+.PARAMETER resultsLimit
+limit the results to an integer
+
+.PARAMETER search
+Get Method search object
+
+.NOTES
+Returns the Entities based on the TypeName and Seach objects provided
+
+.LINK
+https://developers.geotab.com/myGeotab/apiReference/methods/Get
+
+#>
+
 function Get-GeotabEntity {
 
     [CmdletBinding()]
@@ -29,26 +53,38 @@ function Get-GeotabEntity {
     (
         [Parameter(Mandatory)]
         [PsCustomObject]$Session,
+        param
+        (
+            [Parameter(Mandatory)]
+            [PsCustomObject]$Session,
 
-        [Parameter(Mandatory)]
-        [string]$typeName,
+            [Parameter(Mandatory)]
+            [string]$typeName,
+            [string]$typeName,
 
-        [Parameter()]
-        [int]$resultsLimit,
+            [Parameter()]
+            [int]$resultsLimit,
 
-        [Parameter()]
-        [object]$search
+            [Parameter()]
+            [object]$search
+        )
     )
 
+    $Uri = "https://$($Session.path)/apiv1"
+    Write-Debug "Uri: $Uri"
     $Uri = "https://$($Session.path)/apiv1"
     Write-Debug "Uri: $Uri"
 	
     # payload as JSON
     $Body = @{
-        method = 'Get'
-        params = @{ 
-            credentials = $Session.credentials
-            typeName = $typeName
+        # payload as JSON
+        $Body = @{
+            method = 'Get'
+            params = @{ 
+                credentials = $Session.credentials
+                typeName = $typeName
+                typeName = $typeName
+            }
         }
     }
 
@@ -60,11 +96,14 @@ function Get-GeotabEntity {
         $Body['params'].Add('search', $search)
     }
 
-    Write-Debug ($Body | ConvertTo-Json)
+    Write-Debug ($Body | ConvertTo-Json -Depth 10)
 
     # POST
-    $Content = ( Invoke-WebRequest -Uri $uri -Method Post -Body ($Body | ConvertTo-Json) -ContentType "application/json" ).Content | ConvertFrom-Json
+    $Content = ( Invoke-WebRequest -Uri $uri -Method Post -Body ($Body | ConvertTo-Json -Depth 10) -ContentType "application/json" ).Content | ConvertFrom-Json
 
+    # returns PsCustomObject representation of object
+    if ( $Content.result ) { $Content.result }
+    # otherwise raise an exception
     # returns PsCustomObject representation of object
     if ( $Content.result ) { $Content.result }
     # otherwise raise an exception

@@ -10,8 +10,7 @@
 
     # Script module or binary module file associated with this manifest.
     RootModule = 'PsGeotab.psm1'
-    # Script module or binary module file associated with this manifest.
-
+    
     # Version number of this module.
     ModuleVersion = '2.0.0'
 
