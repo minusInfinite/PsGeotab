@@ -3,8 +3,10 @@
 Get Geotab Entities such as a Device or User
 
 .PARAMETER Session
+Geotab Session Object
 
 .PARAMETER typeName
+Geotab Entity Type
 
 .PARAMETER resultsLimit
 limit the results to an integer
@@ -46,7 +48,7 @@ function Get-GeotabEntity {
         method = 'Get'
         params = @{ 
             credentials = $Session.credentials
-            typeName    = $typeName
+            typeName = $typeName
         }
     }
 

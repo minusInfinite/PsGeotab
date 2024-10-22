@@ -18,7 +18,7 @@ The SourceSearch Id to search for in Diagnostics. Available SourceSearch options
 Search for an entry based on the specific Id.
 
 .LINK
-https://developers.geotab.com/myGeotab/apiReference/objects/Engine.DiagnosticSearch
+https://developers.geotab.com/myGeotab/apiReference/objects/DiagnosticSearch
 
 #>
 function New-GeotabDiagnosticSearch {
@@ -29,7 +29,7 @@ function New-GeotabDiagnosticSearch {
         [string]$code,
 
         [Parameter(ValueFromPipelineByPropertyName)]
-        [ValidateSet('BrpFault','DataDiagnostic','GmcccFault','GoDiagnostic','GoFault','LegacyFault','None','ObdFault','ObdWwhFault','Pid','ProprietaryFault','Sid','SuspectParameter')]
+        [ValidateSet('BrpFault', 'DataDiagnostic', 'GmcccFault', 'GoDiagnostic', 'GoFault', 'LegacyFault', 'None', 'ObdFault', 'ObdWwhFault', 'Pid', 'ProprietaryFault', 'Sid', 'SuspectParameter')]
         [string]$diagnosticType,
 
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -43,8 +43,7 @@ function New-GeotabDiagnosticSearch {
     )
 
     begin {}
-    process
-    {
+    process {
         $DiagnosticSearch = @{}
 
         if ($code) { $DiagnosticSearch['code'] = $code }
