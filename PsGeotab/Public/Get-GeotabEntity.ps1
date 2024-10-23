@@ -22,30 +22,6 @@ https://developers.geotab.com/myGeotab/apiReference/methods/Get
 
 #>
 
-<#
-.SYNOPSIS
-Get Geotab Entities such as a Device or User
-
-.PARAMETER Session
-Geotab Session Object
-
-.PARAMETER typeName
-Geotab Entity Type
-
-.PARAMETER resultsLimit
-limit the results to an integer
-
-.PARAMETER search
-Get Method search object
-
-.NOTES
-Returns the Entities based on the TypeName and Seach objects provided
-
-.LINK
-https://developers.geotab.com/myGeotab/apiReference/methods/Get
-
-#>
-
 function Get-GeotabEntity {
 
     [CmdletBinding()]
