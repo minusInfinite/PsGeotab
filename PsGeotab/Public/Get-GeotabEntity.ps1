@@ -49,29 +49,22 @@ https://developers.geotab.com/myGeotab/apiReference/methods/Get
 function Get-GeotabEntity {
 
     [CmdletBinding()]
+
     param
     (
         [Parameter(Mandatory)]
         [PsCustomObject]$Session,
-        param
-        (
-            [Parameter(Mandatory)]
-            [PsCustomObject]$Session,
 
-            [Parameter(Mandatory)]
-            [string]$typeName,
-            [string]$typeName,
+        [Parameter(Mandatory)]
+        [string]$typeName,
 
-            [Parameter()]
-            [int]$resultsLimit,
+        [Parameter()]
+        [int]$resultsLimit,
 
-            [Parameter()]
-            [object]$search
-        )
+        [Parameter()]
+        [object]$search
     )
 
-    $Uri = "https://$($Session.path)/apiv1"
-    Write-Debug "Uri: $Uri"
     $Uri = "https://$($Session.path)/apiv1"
     Write-Debug "Uri: $Uri"
 	
@@ -82,7 +75,6 @@ function Get-GeotabEntity {
             method = 'Get'
             params = @{ 
                 credentials = $Session.credentials
-                typeName = $typeName
                 typeName = $typeName
             }
         }
